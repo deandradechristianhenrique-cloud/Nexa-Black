@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Nexa Black — Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="app">
+    <aside class="sidebar">
+        <div class="logo"><b>N</b><span>Nexa <em>Black</em></span></div>
+        <nav><button data-s="home" class="active">⌂ <span>Visão geral</span></button><button data-s="pix">⌁
+                <span>Pix</span></button><button data-s="transfer">⇄ <span>Transferir</span></button><button
+                data-s="cards">▣ <span>Cartões</span></button><button data-s="goals">◎
+                <span>Metas</span></button><button data-s="statement">☷ <span>Extrato</span></button></nav>
+        <div class="sidebar-bottom"><button id="aiOpen" class="ai-nav">✦ <span>Nexa AI</span></button><button
+                id="logout">↪ <span>Sair</span></button></div>
+    </aside>
+    <main>
+        <header>
+            <div><span class="eyebrow">CONTA DIGITAL</span>
+                <h1 id="hello">Olá</h1>
+            </div>
+            <div class="header-actions"><button id="headerAI" class="ai-pill">✦ Nexa AI</button>
+                <div class="avatar" id="avatar">N</div>
+            </div>
+        </header>
+        <section id="home" class="screen active">
+            <div class="hero-grid">
+                <article class="balance-card">
+                    <div class="card-top"><span>SALDO DISPONÍVEL</span><button id="eye">◉</button></div>
+                    <h2 id="balance">R$ 0,00</h2>
+                    <p>Agência <b id="agency">0001</b> <i>•</i> Conta <b id="account">—</b></p>
+                    <footer><span>Nexa Black</span><span>● Conta ativa</span></footer>
+                </article>
+                <article class="quick panel"><span class="eyebrow">AÇÕES RÁPIDAS</span>
+                    <h3>O que deseja fazer?</h3>
+                    <div class="quick-grid"><button data-s="pix">⌁<small>Pix</small></button><button
+                            data-s="transfer">⇄<small>Transferir</small></button><button
+                            data-s="cards">▣<small>Cartões</small></button><button
+                            data-s="goals">◎<small>Metas</small></button></div>
+                </article>
+            </div>
+            <div class="stats">
+                <article><span>Limite de crédito</span><b id="limit">R$ 0</b></article>
+                <article><span>Chaves Pix</span><b id="keycount">0</b></article>
+                <article><span>Metas ativas</span><b id="goalcount">0</b></article>
+            </div>
+            <div class="section-title">
+                <div><span class="eyebrow">MOVIMENTAÇÕES</span>
+                    <h2>Últimas transações</h2>
+                </div><button data-s="statement" class="text-btn">Ver extrato →</button>
+            </div>
+            <div id="recent" class="list"></div>
+        </section>
+        <section id="pix" class="screen">
+            <div class="section-title">
+                <div><span class="eyebrow">PAGAMENTOS</span>
+                    <h2>Enviar Pix</h2>
+                </div>
+            </div>
+            <form id="pixForm" class="panel form-panel"><input name="key" placeholder="Chave Pix" required><input
+                    name="amount" type="number" step=".01" min=".01" placeholder="Valor" required><input
+                    name="description" placeholder="Descrição"><button class="primary">Confirmar Pix
+                    <span>→</span></button>
+                <div id="pixMsg"></div>
+            </form>
+        </section>
+        <section id="transfer" class="screen">
+            <div class="section-title">
+                <div><span class="eyebrow">MOVIMENTAÇÃO</span>
+                    <h2>Transferência</h2>
+                </div>
+            </div>
+            <form id="transferForm" class="panel form-panel"><input name="bank" placeholder="Banco" required><input
+                    name="beneficiary" placeholder="Favorecido" required><input name="agency" placeholder="Agência"
+                    required><input name="account" placeholder="Conta" required><input name="amount" type="number"
+                    step=".01" min=".01" placeholder="Valor" required><button class="primary">Confirmar transferência
+                    <span>→</span></button>
+                <div id="transferMsg"></div>
+            </form>
+        </section>
+        <section id="cards" class="screen">
+            <div class="section-title">
+                <div><span class="eyebrow">SEUS CARTÕES</span>
+                    <h2>Cartões</h2>
+                </div>
+            </div>
+            <div id="cardsGrid" class="cards"></div>
+        </section>
+        <section id="goals" class="screen">
+            <div class="section-title">
+                <div><span class="eyebrow">PLANEJAMENTO</span>
+                    <h2>Metas financeiras</h2>
+                </div>
+            </div>
+            <form id="goalForm" class="panel form-panel"><input name="name" placeholder="Nome da meta" required><input
+                    name="targetAmount" type="number" step=".01" min="1" placeholder="Valor-alvo" required><input
+                    name="deadline" type="date"><button class="primary">Criar meta <span>→</span></button>
+                <div id="goalMsg"></div>
+            </form>
+            <div id="goalsGrid" class="goals"></div>
+        </section>
+        <section id="statement" class="screen">
+            <div class="section-title">
+                <div><span class="eyebrow">MOVIMENTAÇÕES</span>
+                    <h2>Extrato completo</h2>
+                </div>
+            </div>
+            <div class="panel table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statementBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <div id="aiDrawer" class="ai-drawer">
+        <div class="ai-head">
+            <div><span class="ai-mark">✦</span>
+                <div><b>Nexa AI</b><small>Assistente financeiro</small></div>
+            </div><button id="aiClose">×</button>
+        </div>
+        <div id="aiMessages" class="ai-messages">
+            <div class="ai-bubble assistant"><b>Olá!</b><br>Sou a Nexa AI. Posso analisar sua conta, gastos e metas. O
+                que você gostaria de saber?</div>
+        </div>
+        <div class="ai-suggestions"><button>Quanto gastei este mês?</button><button>Analise minhas
+                metas</button><button>Onde estou gastando mais?</button></div>
+        <form id="aiForm" class="ai-input"><input id="aiText" placeholder="Pergunte à Nexa AI..."
+                autocomplete="off"><button>↑</button></form>
+    </div>
+    <div id="toast"></div>
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
